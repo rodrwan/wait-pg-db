@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
@@ -15,14 +14,13 @@ func main() {
 	for {
 		db, err := NewPostgres(postgresDSN)
 		if err != nil {
-			time.Sleep(1 * time.Second)
 			continue
 		}
 		db.Close()
 		break
 	}
 
-	fmt.Print("Up")
+	fmt.Println("Up")
 
 	os.Exit(0)
 }
