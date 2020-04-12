@@ -3,17 +3,20 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
 func main() {
-	postgresDSN := os.Getenv("POSTGRES_DSN")
+	databaseURL := os.Getenv("DATABASE_URL")
 
 	for {
-		db, err := NewPostgres(postgresDSN)
+		db, err := NewPostgres(databaseURL)
 		if err != nil {
+			fmt.Println("waiting...")
+			time.Sleep(1 * time.Second)
 			continue
 		}
 		db.Close()
